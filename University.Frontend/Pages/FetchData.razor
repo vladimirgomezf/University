@@ -1,11 +1,11 @@
 ﻿@page "/fetchdata"
-
-<PageTitle>Address Site</PageTitle>
-
 @using Microsoft.AspNetCore.Mvc
 @using University.API.Models
 @using University.Frontend.Data
 @inject AddressService address
+@inject NavigationManager navigationManager;
+
+<PageTitle>Address Site</PageTitle>
 
 <div class="h-auto d-flex justify-content-between">
     <h1>Address</h1>
@@ -30,6 +30,7 @@ else
                 <th>State</th>
                 <th>ZipCode</th>
                 <th>Country</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +42,7 @@ else
                     <td>@a.State</td>
                     <td>@a.ZipCode</td>
                     <td>@a.Country</td>
+                    <td><button class="btn btn-danger oi oi-trash mx-1" @onclick="deleteItem(a.Id)"></button><button class="btn btn-success oi oi-pencil mx-1"></button></td>
                 </tr>
             }
         </tbody>
@@ -52,6 +54,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-       add = await address.GetData();
+        add = await address.GetData();
+    }
+
+    private async Task<List<Address>> deleteItem(int id)
+    {
+        return await address.DeleteData(id);
     }
 }
