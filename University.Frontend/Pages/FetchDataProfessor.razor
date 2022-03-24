@@ -1,0 +1,52 @@
+﻿@page "/fetchdata/professor"
+
+<PageTitle>Professor Site</PageTitle>
+
+@using Microsoft.AspNetCore.Mvc
+@using University.API.Models
+@using University.Frontend.Data
+@inject ProfessorService professor
+
+<h1>Professor</h1>
+
+<p>This component fetch the professors data from database.</p>
+
+@if (add == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in add)
+            {
+                <tr>
+                    <td>@a.Name</td>
+                    <td>@a.PhoneNumber</td>
+                    <td>@a.Email</td>
+                    <td>@a.Address</td>
+                    <td>@a.Salary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Professor>? add;
+
+    protected override async Task OnInitializedAsync()
+    {
+        add = await professor.GetData();
+    }
+}

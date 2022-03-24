@@ -1,0 +1,54 @@
+﻿@page "/fetchdata/student"
+
+<PageTitle>Student Site</PageTitle>
+
+@using Microsoft.AspNetCore.Mvc
+@using University.API.Models
+@using University.Frontend.Data
+@inject StudentService student
+
+<h1>Student</h1>
+
+<p>This component fetch the students data from database.</p>
+
+@if (add == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>StudentNumber</th>
+                <th>AverageMark</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in add)
+            {
+                <tr>
+                    <td>@a.Name</td>
+                    <td>@a.PhoneNumber</td>
+                    <td>@a.Email</td>
+                    <td>@a.Address</td>
+                    <td>@a.StudentNumber</td>
+                    <td>@a.AverageMark</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Student>? add;
+
+    protected override async Task OnInitializedAsync()
+    {
+       add = await student.GetData();
+    }
+}

@@ -1,15 +1,17 @@
 ﻿@page "/fetchdata"
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>Address Site</PageTitle>
 
+@using Microsoft.AspNetCore.Mvc
+@using University.API.Models
 @using University.Frontend.Data
-@inject WeatherForecastService ForecastService
+@inject AddressService address
 
-<h1>Weather forecast</h1>
+<h1>Address</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
+<p>This component fetch the addresses data from database.</p>
 
-@if (forecasts == null)
+@if (add == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,20 +20,22 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>ZipCode</th>
+                <th>Country</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var a in add)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@a.Street</td>
+                    <td>@a.City</td>
+                    <td>@a.State</td>
+                    <td>@a.ZipCode</td>
+                    <td>@a.Country</td>
                 </tr>
             }
         </tbody>
@@ -39,10 +43,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private List<Address>? add;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+       add = await address.GetData();
     }
 }
