@@ -22,8 +22,12 @@
     </div>
     <div class="w-100 d-flex justify-content-end">
         <div class="btn-group my-2 w-50 d-flex justify-content-end">
-            <button class="btn btn-primary py-1 px-4 rounded-3 border-0 mx-2">Add</button>
-            <button class="btn btn-danger py-1 px-4 rounded-3 border-0 mx-2">Cancel</button>
+            <NavLink href="/fetchdata" class="btn-group w-50 d-flex justify-content-end" Match="NavLinkMatch.All">
+                <button class="btn btn-primary py-1 px-4 rounded-3 border-0 mx-2">Add</button>
+            </NavLink>
+            <NavLink href="/fetchdata" class="btn-group w-50 d-flex justify-content-end" Match="NavLinkMatch.All">
+                <button class="btn btn-danger py-1 px-4 rounded-3 border-0 mx-2">Cancel</button>
+            </NavLink>
         </div>
     </div>
 </form>
