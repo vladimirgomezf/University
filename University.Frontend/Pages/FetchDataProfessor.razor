@@ -7,7 +7,12 @@
 @using University.Frontend.Data
 @inject ProfessorService professor
 
-<h1>Professor</h1>
+<div class="h-auto d-flex justify-content-between">
+    <h1>Professor</h1>
+    <NavLink href="/professor/form" class="nav-tab d-flex align-middle my-2" Match="NavLinkMatch.All">
+        <button class="btn-success py-1 px-3 rounded-3 border-0">Add Professor</button>
+    </NavLink>
+</div>
 
 <p>This component fetch the professors data from database.</p>
 
