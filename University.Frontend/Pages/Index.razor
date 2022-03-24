@@ -1,9 +1,15 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>University Managment</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="w-100 h-auto flex-column">
+    <NavLink href="/address/form" class="nav-tab" Match="NavLinkMatch.All">
+        <button class="btn-success py-2 px-4 rounded-3 border-0">Add Address</button>
+    </NavLink>
+    <NavLink href="/student/form" class="nav-tab" Match="NavLinkMatch.All">
+        <button class="btn-success py-2 px-4 rounded-3 border-0">Add Student</button>
+    </NavLink>
+    <NavLink href="/professor/form" class="nav-tab" Match="NavLinkMatch.All">
+        <button class="btn-success py-2 px-4 rounded-3 border-0">Add Professor</button>
+    </NavLink>
+</div>
