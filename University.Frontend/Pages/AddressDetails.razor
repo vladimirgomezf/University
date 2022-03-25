@@ -1,0 +1,12 @@
+﻿@page "/address/delete/{id:int}"
+@inject NavigationManager navigationManager
+@inherits AddressDetailsBase
+
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(addresses.Count);
+        navigationManager.NavigateTo("fetchdata");
+    }
+}

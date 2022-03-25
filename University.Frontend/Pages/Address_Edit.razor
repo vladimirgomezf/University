@@ -1,0 +1,60 @@
+﻿@page "/address/edit/{id:int}"
+@using Microsoft.AspNetCore.Mvc
+@using University.API.Models
+@using University.Frontend.Data
+@inject AddressService addressService
+@inject NavigationManager navigationManager;
+@inherits AddressDetailsBase
+
+<PageTitle>Edit Address</PageTitle>
+
+@using Microsoft.AspNetCore.Mvc
+
+<h1>Edit Address</h1>
+
+<p>This component creates a new address to the database.</p>
+
+<EditForm Model="@adds" class="form-control" OnValidSubmit=@SaveData >
+    <div class="w-100 row">
+        <div class="col input-group my-2 flex-column w-50">
+            <input type="text" placeholder="Street" class="input-group-lg bg-dark bg-opacity-25 p-2 my-1 border-0 rounded-3" @bind="adds.Street" />
+            <input type="text" placeholder="City" class="input-group-lg bg-dark bg-opacity-25 p-2 my-1 border-0 rounded-3" @bind="adds.City" />
+            <input type="text" placeholder="State" class="input-group-lg bg-dark bg-opacity-25 p-2 my-1 border-0 rounded-3" @bind="adds.State" />
+        </div>
+        <div class="col input-group my-2 flex-column w-50">
+            <input type="number" placeholder="ZipCode" class="input-group-lg bg-dark bg-opacity-25 p-2 my-1 border-0 rounded-3" @bind="adds.ZipCode" />
+            <input type="text" placeholder="Country" class="input-group-lg bg-dark bg-opacity-25 p-2 my-1 border-0 rounded-3" @bind="adds.Country" />
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-end">
+        <div class="btn-group my-2 w-50 d-flex justify-content-end">
+            <button class="btn btn-primary py-1 px-4 rounded-3 border-0 mx-2" type="Submit">Add</button>
+            <NavLink href="/fetchdata" class="btn-group w-50 d-flex justify-content-end" Match="NavLinkMatch.All">
+                <button class="btn btn-danger py-1 px-4 rounded-3 border-0 mx-2">Cancel</button>
+            </NavLink>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private Address adds = @address;
+    
+    //protected override async Task OnInitializedAsync()
+    //{
+        //adds.Street = address.Street;
+        //adds.City = address.City;
+        //adds.State = address.State;
+        //adds.Country = address.Country;
+        //adds.ZipCode = address.ZipCode;
+    //}
+
+    private void SaveData()
+    {
+        var a = addressService.PutData(adds);
+
+        if(a != null)
+        {
+            navigationManager.NavigateTo("fetchdata");
+        }
+    }
+}
