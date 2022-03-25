@@ -29,6 +29,20 @@ namespace University.Frontend.Data
             }
         }
 
+        public async Task<Address> GetDataById(int id)
+        {
+            HttpResponseMessage res = await _client.GetAsync($"api/address/{id}");
+
+            if (res.IsSuccessStatusCode)
+            {
+                return await res.Content.ReadFromJsonAsync<Address>();
+            }
+            else
+            {
+                return new Address();
+            }
+        }
+
         public async Task<List<Address>> PostData(Address obj)
         {
             HttpResponseMessage res = await _client.PostAsJsonAsync("api/address", obj);
@@ -43,9 +57,26 @@ namespace University.Frontend.Data
             }
         }
 
-        public async Task<List<Address>> DeleteData(int obj)
+        public async Task<List<Address>> PutData(Address obj)
         {
-            HttpResponseMessage res = await _client.DeleteAsync("api/address/"+ obj +"");
+            HttpResponseMessage res = await _client.PutAsJsonAsync("api/address", obj);
+            
+            if (res.IsSuccessStatusCode)
+            {
+                return await res.Content.ReadFromJsonAsync<List<Address>>();
+            }
+            else
+            {
+                return new List<Address>();
+            }
+        }
+
+        public async Task<List<Address>> DeleteData(int id)
+        {
+            HttpResponseMessage res = await _client.DeleteAsync($"api/address/{id}");
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine(res.StatusCode);
+            Console.WriteLine("-------------------------------------------------------------");
             
             if (res.IsSuccessStatusCode)
             {
